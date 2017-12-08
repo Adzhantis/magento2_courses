@@ -5,7 +5,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Catalog\Api\Data;
+namespace Unit1\FirstModule\Api;
 
 /**
  * @api

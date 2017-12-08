@@ -1,4 +1,5 @@
 <?php
+namespace Unit1\FirstModule\MagentoU;
 /**
  * Created by PhpStorm.
  * User: Ally
