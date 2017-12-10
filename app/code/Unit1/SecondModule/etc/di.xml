@@ -1,12 +1,17 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-</config>
-<type name="Unit1\FirstModule\MagentoU\Test">
-<arguments>
-    <argument name="justAParameter" xsi:type="string”> Hello world!2 </argument>
-<argument name=”data” type=”array”>
- <item name=”test-array-item”>Test Array Item!!!2</item>
-</argument>
- </arguments>
- </type>
 
+    <type name="Unit1\FirstModule\MagentoU\Test">
+    <arguments>
+
+        <argument name="justAParameter" xsi:type="string">
+            Hello world!2
+        </argument>
+
+        <argument name="data" xsi:type="array">
+            <item name="test-array-item-2" xsi:type="string">2 Test Array Item!!!</item>
+        </argument>
+
+     </arguments>
+     </type>
+</config>

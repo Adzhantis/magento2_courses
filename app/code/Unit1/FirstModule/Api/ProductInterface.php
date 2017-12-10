@@ -5,13 +5,13 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Catalog\Api\Data;
+namespace Unit1\FirstModule\Api;
 
 /**
  * @api
  * @since 100.0.2
  */
-interface ProductInterface extends \Magento\Framework\Api\CustomAttributesDataInterface
+interface ProductInterface extends \Magento\Catalog\Api\ProductRepositoryInterface
 {
     /**#@+
      * Constants defined for keys of  data array
