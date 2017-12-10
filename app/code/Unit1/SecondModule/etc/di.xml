@@ -14,4 +14,8 @@
 
      </arguments>
      </type>
+
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="PaymentVaultExtensionAttributeOperations" type="Magento\Vault\Plugin\PaymentVaultAttributesLoad"/>
+    </type>
 </config>
