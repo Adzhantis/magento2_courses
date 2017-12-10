@@ -155,7 +155,7 @@ class Base implements \Magento\Framework\App\RouterInterface
     {
         $params = $this->parseRequest($request);
 
-        echo '<pre>';var_dump($params);die;
+        //echo '<pre>';var_dump($params);die;
 
         return $this->matchAction($request, $params);
     }

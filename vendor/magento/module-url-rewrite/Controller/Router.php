@@ -99,6 +99,7 @@ class Router implements \Magento\Framework\App\RouterInterface
 
         $request->setAlias(\Magento\Framework\UrlInterface::REWRITE_REQUEST_PATH_ALIAS, $rewrite->getRequestPath());
         $request->setPathInfo('/' . $rewrite->getTargetPath());
+        echo '<pre>';var_dump($rewrite->getTargetPath());die;
         return $this->actionFactory->create(\Magento\Framework\App\Action\Forward::class);
     }
 
