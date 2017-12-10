@@ -36,6 +36,7 @@ class RouterList implements RouterListInterface
             }
         );
         uasort($this->routerList, [$this, 'compareRoutersSortOrder']);
+        //echo '<pre>';var_dump($this->routerList);die;
     }
 
     /**
