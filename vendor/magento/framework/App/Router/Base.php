@@ -307,7 +307,7 @@ class Base implements \Magento\Framework\App\RouterInterface
             }
             $action = 'noroute';
         }
-echo '<pre>';var_dump($moduleFrontName, $actionPath, $action);die;
+//echo '<pre>';var_dump($moduleFrontName, $actionPath, $action);die;
         // set values only after all the checks are done
         $request->setModuleName($moduleFrontName);
         $request->setControllerName($actionPath);
