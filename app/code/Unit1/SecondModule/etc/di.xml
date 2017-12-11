@@ -15,7 +15,8 @@
      </arguments>
      </type>
 
-    <type name="Magento\Catalog\Model\Product">
-        <plugin name="PaymentVaultExtensionAttributeOperations" type="Magento\Vault\Plugin\PaymentVaultAttributesLoad"/>
+    <type name="Magento\Theme\Block\Html\Footer">
+        <plugin name="changeCopyRight" type="Unit1\SecondModule\Plugin\ChangeCopyRight"/>
     </type>
+   
 </config>
