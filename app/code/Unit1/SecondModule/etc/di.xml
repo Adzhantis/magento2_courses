@@ -19,7 +19,7 @@
         <plugin name="changeCopyRight" type="Unit1\SecondModule\Plugin\ChangeCopyRight"/>
     </type>
     <type name="Magento\Theme\Block\Html\Breadcrumbs">
-        <plugin name="afterAddCrumb" type="Unit1\SecondModule\Plugin\afterAddCrumb"/>
+        <plugin name="beforeAddCrumb" type="Unit1\SecondModule\Plugin\beforeAddCrumb"/>
     </type>
 
 </config>
