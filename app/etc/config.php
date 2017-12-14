@@ -111,7 +111,7 @@ return array (
     'Shopial_Facebook' => 1,
     'Training_Test2' => 1,
     'Training_Test' => 1,
-    'Unit1_SecondModule' => 1,
     'Unit1_FirstModule' => 1,
+    'Unit1_SecondModule' => 1,
   ),
 );
