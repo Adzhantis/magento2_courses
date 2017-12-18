@@ -8,32 +8,31 @@
 namespace Test\Controller\Index;
 
 /**
- * Logout controller
+ * Index controller
  *
- * @method \Magento\Framework\App\RequestInterface getRequest()
- * @method \Magento\Framework\App\Response\Http getResponse()
  */
-class Index extends \Magento\Framework\App\Action\Action
+class Index implements \Magento\Framework\App\ActionInterface
 {
 
     protected $resultFactory;
 
 
+    /**
+     * Index constructor.
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     */
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
-        parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
     }
 
     /**
-     * Customer logout action
      *
-     * @return \Magento\Framework\Controller\Result\Json
+     * @return \Magento\Framework\View\Result\Page
      */
     public function execute()
     {
-        return $this->resultPageFactory->crete();
+        return $this->resultPageFactory->create();
     }
 }

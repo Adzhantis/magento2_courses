@@ -292,6 +292,7 @@ class Base implements \Magento\Framework\App\RouterInterface
             $currentModuleName = $moduleName;
 
             $actionClassName = $this->actionList->get($moduleName, $this->pathPrefix, $actionPath, $action);
+            var_dump($moduleName, $this->pathPrefix, $actionPath, $action);die;
             if (!$actionClassName || !is_subclass_of($actionClassName, $this->actionInterface)) {
                 continue;
             }
@@ -299,6 +300,10 @@ class Base implements \Magento\Framework\App\RouterInterface
             $actionInstance = $this->actionFactory->create($actionClassName);
             break;
         }
+        echo '<pre>';var_dump(
+            !$actionClassName || !is_subclass_of($actionClassName, $this->actionInterface),
+        !$actionClassName , !is_subclass_of($actionClassName, $this->actionInterface),$this->actionInterface,$actionClassName
+    );die;
         echo '<pre>';var_dump($modules,$moduleFrontName, $actionPath, $action, $actionInstance);die;
         if (null == $actionInstance) {
             $actionInstance = $this->getNotFoundAction($currentModuleName);
