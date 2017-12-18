@@ -142,6 +142,8 @@ class Config implements ConfigInterface
             }
         }
 
+       // var_dump($frontName, $routes);die;
+
         return array_unique($modules);
     }
 

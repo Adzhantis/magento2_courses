@@ -155,7 +155,7 @@ class Base implements \Magento\Framework\App\RouterInterface
     {
         $params = $this->parseRequest($request);
 
-        //echo '<pre>';var_dump($params);die;
+       // echo '<pre>';var_dump($params, $this->matchAction($request, $params));die;
 
         return $this->matchAction($request, $params);
     }
@@ -299,7 +299,7 @@ class Base implements \Magento\Framework\App\RouterInterface
             $actionInstance = $this->actionFactory->create($actionClassName);
             break;
         }
-
+        echo '<pre>';var_dump($modules,$moduleFrontName, $actionPath, $action, $actionInstance);die;
         if (null == $actionInstance) {
             $actionInstance = $this->getNotFoundAction($currentModuleName);
             if ($actionInstance === null) {
@@ -307,7 +307,7 @@ class Base implements \Magento\Framework\App\RouterInterface
             }
             $action = 'noroute';
         }
-//echo '<pre>';var_dump($moduleFrontName, $actionPath, $action);die;
+echo '<pre>';var_dump($moduleFrontName, $actionPath, $action);die;
         // set values only after all the checks are done
         $request->setModuleName($moduleFrontName);
         $request->setControllerName($actionPath);

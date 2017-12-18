@@ -3,8 +3,14 @@ namespace Unit1\SecondModule\Plugin;
 
 use Magento\Framework\Phrase;
 
-class beforeAddCrumb
+class BeforeAddCrumb
 {
+    public function __construct()
+    {
+
+    }
+
+
     public function beforeAddCrumb($subject, $crumbName, $crumbInfo)
     {
 
