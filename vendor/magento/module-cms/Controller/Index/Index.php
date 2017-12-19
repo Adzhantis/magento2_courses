@@ -34,7 +34,7 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute($coreRoute = null)
     {
-        $this->_objectManager->get(\Unit1\FirstModule\MagentoU\Test::class);
+        //$this->_objectManager->get(\Unit1\FirstModule\MagentoU\Test::class);
 
         $pageId = $this->_objectManager->get(
             \Magento\Framework\App\Config\ScopeConfigInterface::class

@@ -292,7 +292,7 @@ class Base implements \Magento\Framework\App\RouterInterface
             $currentModuleName = $moduleName;
 
             $actionClassName = $this->actionList->get($moduleName, $this->pathPrefix, $actionPath, $action);
-            var_dump($moduleName, $this->pathPrefix, $actionPath, $action);die;
+           // var_dump($actionClassName, $moduleName, $this->pathPrefix, $actionPath, $action);die;
             if (!$actionClassName || !is_subclass_of($actionClassName, $this->actionInterface)) {
                 continue;
             }
@@ -300,11 +300,11 @@ class Base implements \Magento\Framework\App\RouterInterface
             $actionInstance = $this->actionFactory->create($actionClassName);
             break;
         }
-        echo '<pre>';var_dump(
+        /*echo '<pre>';var_dump(
             !$actionClassName || !is_subclass_of($actionClassName, $this->actionInterface),
         !$actionClassName , !is_subclass_of($actionClassName, $this->actionInterface),$this->actionInterface,$actionClassName
     );die;
-        echo '<pre>';var_dump($modules,$moduleFrontName, $actionPath, $action, $actionInstance);die;
+        echo '<pre>';var_dump($modules,$moduleFrontName, $actionPath, $action, $actionInstance);die;*/
         if (null == $actionInstance) {
             $actionInstance = $this->getNotFoundAction($currentModuleName);
             if ($actionInstance === null) {
@@ -312,7 +312,7 @@ class Base implements \Magento\Framework\App\RouterInterface
             }
             $action = 'noroute';
         }
-echo '<pre>';var_dump($moduleFrontName, $actionPath, $action);die;
+//echo '<pre>';var_dump($moduleFrontName, $actionPath, $action);die;
         // set values only after all the checks are done
         $request->setModuleName($moduleFrontName);
         $request->setControllerName($actionPath);
