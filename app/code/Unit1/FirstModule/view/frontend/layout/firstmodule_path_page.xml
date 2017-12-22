@@ -1,0 +1,6 @@
+<?xml version="1.0"?>Unit1_FirstModule
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="content">
+        <block class="Unit1\FirstModule\Block\Red" name="firstmodule_path_page" template="Unit1_FirstModule::index.phtml" />
+    </referenceContainer>
+</page>
