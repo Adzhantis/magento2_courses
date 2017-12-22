@@ -5,13 +5,13 @@
  * See COPYING.txt for license details.
  */
 
-namespace Test\Controller\Index;
+namespace Training\Test\Controller\Index;
 
 /**
  * Index controller
  *
  */
-class Index implements \Magento\Framework\App\ActionInterface
+class Index extends \Magento\Framework\App\Action\Action
 {
 
     protected $resultFactory;
@@ -22,9 +22,11 @@ class Index implements \Magento\Framework\App\ActionInterface
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
     public function __construct(
+        \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
         $this->resultPageFactory = $resultPageFactory;
+        parent::__construct($context);
     }
 
     /**

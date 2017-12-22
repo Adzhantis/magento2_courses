@@ -2,7 +2,7 @@
 namespace Unit1\SecondModule\Plugin;
 
 
-class afterGetPrice
+class AfterGetPrice
 {
     public function afterGetPrice($subject, $result)
     {

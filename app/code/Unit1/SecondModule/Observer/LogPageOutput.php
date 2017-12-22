@@ -16,7 +16,7 @@ class LogPageOutput implements ObserverInterface
      */
     public function __construct(\Psr\Log\LoggerInterface $logger)
     {
-        $this->_logger = $logger;
+        //$this->_logger = $logger;
     }
 
     /**
@@ -28,9 +28,9 @@ class LogPageOutput implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        $response = $observer->getEvent()->getData('response');
-        $body = $response->getBody();
-        $this->_logger->addDebug("--------\n\n\n BODY \n\n\n " . $body);
+       // $response = $observer->getEvent()->getData('response');
+        //$body = $response->getBody();
+       // $this->_logger->addDebug("--------\n\n\n BODY \n\n\n " . $body);
         //echo '<pre>'; var_dump($body);die;
     }
 }

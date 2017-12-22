@@ -18,7 +18,7 @@ class BeforeAddCrumb
 
             $crumbInfo = [
                 'label' => $crumbInfo['label'] . ' (str)', $crumbInfo['label'],
-                'title' => $crumbInfo['title'] . ' (str)', $crumbInfo['title'],
+                'title' => !empty($crumbInfo['title']) ? $crumbInfo['title'] . ' (str)' : '',
                 'link' => isset($crumbInfo['link']) ?: '',
             ];
 
