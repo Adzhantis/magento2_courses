@@ -104,7 +104,7 @@ class ActionList
                 $module . '\\controller' . $area . '\\' . $namespace . '\\' . $action
             )
         );
-        var_dump($fullPath,$this->actions[$fullPath], $fullPath,$this->actionInterface, is_subclass_of($this->actions[$fullPath], $this->actionInterface));die;
+       // var_dump($fullPath,$this->actions[$fullPath], $fullPath,$this->actionInterface, is_subclass_of($this->actions[$fullPath], $this->actionInterface));die;
         if (isset($this->actions[$fullPath])) {
             return is_subclass_of($this->actions[$fullPath], $this->actionInterface) ? $this->actions[$fullPath] : null;
         }
