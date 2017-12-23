@@ -5,7 +5,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Training\Test\Controller\Index;
+namespace Training\Test3\Controller\Action;
 
 /**
  * Index controller
@@ -14,18 +14,21 @@ namespace Training\Test\Controller\Index;
 class Index extends \Magento\Framework\App\Action\Action
 {
 
+    /**
+     * @var \Magento\Framework\View\Result\PageFactory
+     */
     protected $resultFactory;
-
 
     /**
      * Index constructor.
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Framework\View\Result\PageFactory $resultFactory
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        \Magento\Framework\View\Result\PageFactory $resultFactory
     ) {
-        $this->resultFactory = $resultPageFactory;
+        $this->resultFactory = $resultFactory;
         parent::__construct($context);
     }
 
@@ -35,6 +38,8 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        return $this->resultFactory->create();
+        $this->_view->loadLayout(false);
+        $this->_view->renderLayout();
+        return $this->getResponse()->appendBody("HELLO WORLD");
     }
 }
