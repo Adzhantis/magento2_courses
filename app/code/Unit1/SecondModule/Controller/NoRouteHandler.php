@@ -8,11 +8,13 @@ use \Magento\Framework\App\RequestInterface;
 class NoRouteHandler implements NoRouteHandlerInterface {
     public function process(RequestInterface $request) {
         $moduleName = 'cms';
-        $actionPath = 'index';
-        $actionName = 'index';
+        $actionPath = 'page';
+        $actionName = 'view';
         $request->setModuleName($moduleName)
             ->setControllerName($actionPath)
-            ->setActionName($actionName);
+            ->setActionName($actionName)
+            ->setParams(['page_id' => 3]);
+
 
         return true;
     }
