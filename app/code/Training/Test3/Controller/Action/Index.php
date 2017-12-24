@@ -40,6 +40,10 @@ class Index extends \Magento\Framework\App\Action\Action
     {
         $this->_view->loadLayout(false);
         $this->_view->renderLayout();
-        return $this->getResponse()->appendBody("HELLO WORLD");
+         $this->getResponse()->appendBody("HELLO WORLD<hr><hr>");
+         $this->getResponse()->appendBody("HELLO WORLD<hr><hr>");
+         $this->getResponse()->appendBody("HELLO WORLD<hr><hr>");
+         $this->getResponse()->appendBody("HELLO WORLD<hr><hr>");
+        return $this->getResponse()->appendBody("HELLO WORLD<hr><hr>");
     }
 }
