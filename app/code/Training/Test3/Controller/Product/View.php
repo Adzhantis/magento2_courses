@@ -19,6 +19,7 @@ class View extends \Magento\Framework\App\Action\Action
         \Magento\Catalog\Controller\Product\View $controller, $result)
     {//echo '<pre>'; var_dump(get_class($result));die;
         // echo "AFTER"; exit;
+       //echo '<pre>'; var_dump($controller->_view->loadLayout(false)->generateXml());die;
         return $result;
     }
 

@@ -102,6 +102,7 @@ class Builder implements BuilderInterface
 
         /* generate xml from collected text updates */
         $this->layout->generateXml();
+       // echo '<pre>'; var_dump($this->layout);die;
 
         Profiler::stop('layout_generate_xml');
         Profiler::stop('LAYOUT');

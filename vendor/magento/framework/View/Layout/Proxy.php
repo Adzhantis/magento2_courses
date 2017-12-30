@@ -96,6 +96,7 @@ class Proxy extends \Magento\Framework\View\Layout implements \Magento\Framework
                 ? $this->_objectManager->get($this->_instanceName)
                 : $this->_objectManager->create($this->_instanceName);
         }
+       // echo '<pre>'; var_dump(get_class($this->_subject));die;
         return $this->_subject;
     }
 
