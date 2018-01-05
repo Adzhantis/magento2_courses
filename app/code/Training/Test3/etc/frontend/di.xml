@@ -4,4 +4,10 @@
         <plugin name="product-view-controller-plugin"
                 type="Training\Test3\Controller\Product\View" sortOrder="10"/>
     </type>
+
+    <type name="Magento\Catalog\Block\Product\View\Description">
+        <plugin name="product-view-desription-plugin"
+                type="Training\Test3\Block\Product\View\Description" sortOrder="10"/>
+    </type>
+
 </config>
