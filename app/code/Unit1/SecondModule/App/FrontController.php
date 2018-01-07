@@ -34,7 +34,7 @@ class FrontController extends \Magento\Framework\App\FrontController
     public function dispatch(\Magento\Framework\App\RequestInterface $request)
     {
         foreach ($this->_routerList as $router) {
-            $this->logger->notice(get_class($router));
+            $this->logger->notice('unit1_second_module ' . get_class($router));
          }
         return parent::dispatch($request);
     }
