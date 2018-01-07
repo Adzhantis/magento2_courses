@@ -13,6 +13,6 @@
                 <argument name="title" translate="true" xsi:type="string">Email to a Friend</argument>
             </action>
         </referenceBlock>
-
+        <referenceBlock name="training_render_custom" remove="true"></referenceBlock>
     </body>
 </page>
