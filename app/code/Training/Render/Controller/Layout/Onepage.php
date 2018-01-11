@@ -21,23 +21,31 @@ class Onepage extends \Magento\Framework\App\Action\Action
     protected $resultFactory;
 
     /**
-     * @var \Magento\Store\Model\ResourceModel\Store\CollectionFactory
+     * @var \Magento\Store\Model\ResourceModel\Store\Collection
      */
-    protected $_storeCollectionFactory;
+    protected $_storeCollection;
+
+    /**
+     * @var \Magento\Store\Model\Store
+     */
+    protected $_store;
 
     /**
      * Onepage constructor.
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Framework\View\Result\PageFactory $resultFactory
-     * @param \Magento\Store\Model\ResourceModel\Store\CollectionFactory $storeCollectionFactory
+     * @param \Magento\Store\Model\ResourceModel\Store\Collection $storeCollection
+     * @param \Magento\Store\Model\Store $store
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultFactory,
-        \Magento\Store\Model\ResourceModel\Store\CollectionFactory $storeCollectionFactory
+        \Magento\Store\Model\ResourceModel\Store\Collection $storeCollection,
+        \Magento\Store\Model\Store $store
     ) {
         $this->resultFactory = $resultFactory;
-        $this->_storeCollectionFactory = $storeCollectionFactory;
+        $this->_storeCollection = $storeCollection;
+        $this->_store = $store;
         parent::__construct($context);
     }
 
@@ -47,8 +55,10 @@ class Onepage extends \Magento\Framework\App\Action\Action
     public function execute()
     {
 
-        //$store = $this->_storeCollectionFactory->create();
-        //echo '<pre>'; var_dump(get_class($store), get_class($this->_storeCollectionFactory));die;
+        //$storeId = $this->_store->getRootCategoryId();
+        //$storeCollection->addIdFilter($storeId);
+
+        echo '<pre>'; var_dump($this->_storeCollection);die;
         $this->_view->loadLayout(false);
         $this->_view->renderLayout();
         return $this->getResponse();
