@@ -58,7 +58,7 @@ class Onepage extends \Magento\Framework\App\Action\Action
         //$storeId = $this->_store->getRootCategoryId();
         //$storeCollection->addIdFilter($storeId);
 
-        echo '<pre>'; var_dump($this->_storeCollection);die;
+        //echo '<pre>'; var_dump($this->_storeCollection);die;
         $this->_view->loadLayout(false);
         $this->_view->renderLayout();
         return $this->getResponse();
