@@ -56,7 +56,7 @@ class Onepage extends \Magento\Framework\App\Action\Action
     {
         foreach ($this->_storeCollection as $key => $value) {
             echo '<pre>';
-            print_r($value->getData());
+            print_r($value->getRootCategoryId());
         }die;
     }
 }
