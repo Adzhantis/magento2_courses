@@ -50,17 +50,13 @@ class Onepage extends \Magento\Framework\App\Action\Action
     }
 
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
      */
     public function execute()
     {
-
-        //$storeId = $this->_store->getRootCategoryId();
-        //$storeCollection->addIdFilter($storeId);
-
-        //echo '<pre>'; var_dump($this->_storeCollection);die;
-        $this->_view->loadLayout(false);
-        $this->_view->renderLayout();
-        return $this->getResponse();
+        foreach ($this->_storeCollection as $key => $value) {
+            echo '<pre>';
+            print_r($value->getData());
+        }die;
     }
 }
