@@ -1,0 +1,22 @@
+<?php
+/**
+ * Product additional attributes template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Attributes
+ */
+?>
+<div style="background-color:red;">
+        <h1> test template </h1>
+</div>
+
+<?php
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+    $_product = $block->getProduct();
+    $_additional = $block->getAdditionalData();
+    $countAdditionalAttrs = count($_additional);
+?>
+<script>
+require(["jquery"], function($){
+   console.log(' countAdditionalAttrs = '  + <?= $countAdditionalAttrs ?>);
+});
+</script>

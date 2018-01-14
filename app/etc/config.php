@@ -109,6 +109,7 @@ return array (
     'Magento_CatalogWidget' => 1,
     'Magento_Wishlist' => 1,
     'Shopial_Facebook' => 1,
+    'Training_Js' => 1,
     'Training_Render' => 1,
     'Training_Test2' => 1,
     'Training_Test' => 1,
