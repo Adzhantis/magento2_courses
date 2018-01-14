@@ -1,0 +1,14 @@
+<?php
+/**
+ * @var $block \Magento\Framework\View\Element\Template
+ */
+?>
+
+<?php
+    $fullActionName = $block->getRequest()->getFullActionName();
+?>
+<script>
+require(["jquery"], function($){
+   console.log(' fullActionName = '  + '<?= $fullActionName ?>');
+});
+</script>
