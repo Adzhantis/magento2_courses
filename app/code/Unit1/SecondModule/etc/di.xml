@@ -22,8 +22,4 @@
         <plugin name="beforeAddCrumb" type="Unit1\SecondModule\Plugin\BeforeAddCrumb"/>
     </type>
 
-    <type name="Magento\Catalog\Model\Product">
-        <plugin name="afterGetPrice" type="Unit1\SecondModule\Plugin\afterGetPrice"/>
-    </type>
-
 </config>
