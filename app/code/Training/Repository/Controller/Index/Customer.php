@@ -7,11 +7,12 @@
 
 namespace Training\Repository\Controller\Index;
 
+use \Magento\Store\Model\Store;
 /**
  * Index controller
  *
  */
-class Index extends \Magento\Framework\App\Action\Action
+class Customer extends \Magento\Framework\App\Action\Action
 {
 
     /**
@@ -19,10 +20,8 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     protected $pageFactory;
 
-    /**
-     * @var \Magento\Catalog\Api\ProductRepositoryInterface
-     */
-    protected $productRepository;
+
+    protected $customerRepository;
     protected $searchCriteria;
     protected $sortOrder;
     protected $filter;
@@ -32,7 +31,7 @@ class Index extends \Magento\Framework\App\Action\Action
      * Index constructor.
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Framework\View\Result\PageFactory $pageFactory
-     * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+     * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @param \Magento\Framework\Api\SortOrder $sortOrder
      * @param \Magento\Framework\Api\Filter $filter
@@ -41,14 +40,14 @@ class Index extends \Magento\Framework\App\Action\Action
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria,
          \Magento\Framework\Api\SortOrder $sortOrder,
         \Magento\Framework\Api\Filter $filter,
         \Magento\Framework\Api\Search\FilterGroup $filterGroup
     ) {
         $this->pageFactory = $pageFactory;
-        $this->productRepository = $productRepository;
+        $this->customerRepository = $customerRepository;
         $this->searchCriteria = $searchCriteria;
         $this->sortOrder = $sortOrder;
         $this->filter = $filter;
@@ -56,25 +55,22 @@ class Index extends \Magento\Framework\App\Action\Action
         parent::__construct($context);
     }
 
-    /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
-     */
     public function execute() {
 
-        $filterName = $this->filter
-            ->setField("name")
-            ->setValue("%n%")
+        $filterFirstname = $this->filter
+            ->setField("first_name")
+            ->setValue("%g%")
             ->setConditionType("like");
 
-        $filterWeight = $this->filter
-            ->setField("weight")
-            ->setValue("1")
-            ->setConditionType("eq");
+        $filterEmail = $this->filter
+            ->setField("email")
+            ->setValue("%s%")
+            ->setConditionType("like");
 
-        $this->filterGroup->setFilters([$filterName, $filterWeight]);
+        $this->filterGroup->setFilters([$filterFirstname, $filterEmail]);
 
         $this->sortOrder
-            ->setField("name")
+            ->setField("email")
             ->setDirection("ASC");
 
         $this->searchCriteria
@@ -83,13 +79,24 @@ class Index extends \Magento\Framework\App\Action\Action
 
         $this->searchCriteria->setPageSize(6); //retrieve 6 or less entities
 
-        $products = $this->productRepository->getList($this->searchCriteria);
+        $customers = $this->customerRepository->getList($this->searchCriteria);
 
-        foreach ($products->getItems() as $product) {
-            var_dump($product->getName());
-            var_dump($product->getWeight());
-        } //var_dump($products);
-        die;
+        foreach ($customers->getItems() as $customer) {
+            $this->outputCustomer($customer);
+        }
 
+        return $this->pageFactory->create();
+    }
+
+    private function outputCustomer(
+        \Magento\Customer\Api\Data\CustomerInterface $customer
+    ) {
+        $this->getResponse()->appendBody(sprintf(
+            "\"%s %s\" <%s> (%s)\n",
+            $customer->getFirstname(),
+            $customer->getLastname(),
+            $customer->getEmail(),
+            $customer->getId()
+        ));
     }
 }
