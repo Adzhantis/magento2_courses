@@ -25,7 +25,7 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     protected $productRepository;
     protected $searchCriteria;
-    protected $sortOrderBuilder;
+    protected $sortOrder;
     protected $filter;
     protected $filterGroup;
 
@@ -35,7 +35,7 @@ class Index extends \Magento\Framework\App\Action\Action
      * @param \Magento\Framework\View\Result\PageFactory $pageFactory
      * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @param \Magento\Framework\Api\SortOrderBuilder $sortOrderBuilder
+     * @param \Magento\Framework\Api\SortOrder $sortOrder
      * @param \Magento\Framework\Api\Filter $filter
      * @param \Magento\Framework\Api\Search\FilterGroup $filterGroup
      */
@@ -44,14 +44,14 @@ class Index extends \Magento\Framework\App\Action\Action
         \Magento\Framework\View\Result\PageFactory $pageFactory,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria,
-         \Magento\Framework\Api\SortOrderBuilder $sortOrderBuilder,
+         \Magento\Framework\Api\SortOrder $sortOrder,
         \Magento\Framework\Api\Filter $filter,
         \Magento\Framework\Api\Search\FilterGroup $filterGroup
     ) {
         $this->pageFactory = $pageFactory;
         $this->productRepository = $productRepository;
         $this->searchCriteria = $searchCriteria;
-        $this->sortOrderBuilder = $sortOrderBuilder;
+        $this->sortOrder = $sortOrder;
         $this->filter = $filter;
         $this->filterGroup = $filterGroup;
         parent::__construct($context);
@@ -62,18 +62,34 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute() {
 
-        $this->filter
+        $filterName = $this->filter
             ->setField("name")
             ->setValue("%n%")
             ->setConditionType("like");
-        $this->filterGroup->setFilters([$this->filter]);
 
+        $filterWeight = $this->filter
+            ->setField("weight")
+            ->setValue("1")
+            ->setConditionType("eq");
 
-        $products = $this->productRepository->getList($this->searchCriteria->setFilterGroups([$this->filterGroup]));
+        $this->filterGroup->setFilters([$filterName, $filterWeight]);
+
+        $this->sortOrder
+            ->setField("name")
+            ->setDirection("ASC");
+
+        $this->searchCriteria
+            ->setFilterGroups([$this->filterGroup])
+            ->setSortOrders([$this->sortOrder]);
+
+        $this->searchCriteria->setPageSize(6); //retrieve 6 or less entities
+
+        $products = $this->productRepository->getList($this->searchCriteria);
+
         foreach ($products->getItems() as $product) {
             var_dump($product->getName());
             var_dump($product->getWeight());
-        } die;
-       // return $this->pageFactory->create();
+        } var_dump($products);die;
+
     }
 }
