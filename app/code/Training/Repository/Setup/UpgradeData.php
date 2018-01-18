@@ -33,19 +33,21 @@ class UpgradeData implements UpgradeDataInterface
 
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        if (version_compare($context->getVersion(), '2.0.1', '<')) {
+
+        if (version_compare($context->getVersion(), '2.0.2', '<')) {
 
             for ($a = 0; $a < 50; $a++) {
 
-                $this->exampleFactory->create()->setData(
+                $example = $this->exampleFactory->create();
+
+                $example->setData(
                     [
-                        'example_id' => 0,
                         'example_name' => rand(100000, 999999),
                     ]
                 )->save();
 
             }
-        }
 
+        }
     }
 }
