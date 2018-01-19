@@ -1,23 +1,23 @@
 <?php
 
-namespace Training\Repository\Model;
+namespace Training\Attribute\Model;
 
-class Example extends \Magento\Framework\Model\AbstractModel
+class CategoryCountries extends \Magento\Framework\Model\AbstractModel
 {
 
     /**
      * Example constructor.
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
-     * @param ResourceModel\Example $resource
-     * @param ResourceModel\Example\Collection $resourceCollection
+     * @param ResourceModel\CategoryCountries $resource
+     * @param ResourceModel\CategoryCountries\Collection $resourceCollection
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
-        ResourceModel\Example $resource,
-        ResourceModel\Example\Collection $resourceCollection,
+        ResourceModel\CategoryCountries $resource,
+        ResourceModel\CategoryCountries\Collection $resourceCollection,
         array $data = []
     )
     {
@@ -26,6 +26,6 @@ class Example extends \Magento\Framework\Model\AbstractModel
 
     protected function _construct()
     {
-        $this->_init(ResourceModel\Example::class);
+        $this->_init(ResourceModel\CategoryCountries::class);
     }
 }
