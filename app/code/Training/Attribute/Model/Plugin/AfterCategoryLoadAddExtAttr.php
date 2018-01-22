@@ -12,7 +12,7 @@ namespace Training\Attribute\Model\Plugin;
  * @see StockStatusInterface when you want to read the stock data for representation layer (storefront)
  * @see StockItemRepositoryInterface::save as extension point for customization of saving process
  */
-class AfterProductLoadAddExtAttr
+class AfterCategoryLoadAddExtAttr
 {
 
     /**
@@ -30,7 +30,7 @@ class AfterProductLoadAddExtAttr
      * @param \Magento\Catalog\Model\Product $product
      * @return \Magento\Catalog\Model\Product
      */
-    public function afterLoad(\Magento\Catalog\Model\Product $product)
+    public function afterLoad(\Magento\Catalog\Model\Category $product)
     {
         $productExtension = $product->getExtensionAttributes();
         $productExtension->setStockItem($this->stockRegistry->getStockItem($product->getId()));
