@@ -39,6 +39,7 @@ class AfterProductLoad
         $productExtension = $product->getExtensionAttributes();
         $productExtension->setStockItem($this->stockRegistry->getStockItem($product->getId()));
         $product->setExtensionAttributes($productExtension);
+        echo '<pre>'; var_dump(get_class($product), get_class($productExtension), get_class($this->stockRegistry));die;
         return $product;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Training\Attribute\Model\ResourceModel\CategoryCountries;
+
 use \Training\Attribute\Model\CategoryCountries as Model;
 use \Training\Attribute\Model\ResourceModel\CategoryCountries as ResourceModel;
 
