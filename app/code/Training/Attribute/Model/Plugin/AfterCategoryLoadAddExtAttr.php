@@ -6,6 +6,8 @@
  */
 namespace Training\Attribute\Model\Plugin;
 
+use Magento\Catalog\Api\Data\CategoryExtensionFactory;
+use Magento\Catalog\Api\Data\CategoryExtensionInterface;
 /**
  * @deprecated 100.2.0 Stock Item as a part of ExtensionAttributes is deprecated
  * @see StockItemInterface when you want to change the stock data
@@ -15,26 +17,42 @@ namespace Training\Attribute\Model\Plugin;
 class AfterCategoryLoadAddExtAttr
 {
 
-    /**
-     * @param \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry
-     */
+    protected $extensionFactory;
+    protected $categoryCountriesModel;
     public function __construct(
-        \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry
-    ) {
-        $this->stockRegistry = $stockRegistry;
+        CategoryExtensionFactory $extensionFactory,
+        \Training\Attribute\Model\CategoryCountries $categoryCountriesModel
+    ){
+        $this->extensionFactory = $extensionFactory;
+        $this->categoryCountriesModel = $categoryCountriesModel;
     }
 
-    /**
-     * Add stock item information to the product's extension attributes
-     *
-     * @param \Magento\Catalog\Model\Product $product
-     * @return \Magento\Catalog\Model\Product
-     */
-    public function afterLoad(\Magento\Catalog\Model\Category $product)
+    public function afterLoad(
+        \Magento\Catalog\Model\Category $category
+    )
     {
-        $productExtension = $product->getExtensionAttributes();
-        $productExtension->setStockItem($this->stockRegistry->getStockItem($product->getId()));
-        $product->setExtensionAttributes($productExtension);
-        return $product;
+
+        $categoryExtension = $category->getExtensionAttributes();
+
+       /* var_dump($category->getExtensionAttributes(),
+            $category->getId(),
+            $this->categoryCountriesModel->getCategoryCountries($category)
+        );die;*/
+
+        $categoryExtension->setCategoryCountries($this->categoryCountriesModel->getCategoryCountries($category));
+        $category->setExtensionAttributes($categoryExtension);
+       // var_dump($category->getExtensionAttributes());die;
+        return $category;
+    }
+
+    public function afterGetExtensionAttributes(
+        \Magento\Catalog\Model\Category $category,
+        CategoryExtensionInterface $extension = null
+    ) {
+        if ($extension === null) {
+            $extension = $this->extensionFactory->create();
+        }
+
+        return $extension;
     }
 }

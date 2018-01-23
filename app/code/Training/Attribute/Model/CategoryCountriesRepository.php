@@ -4,7 +4,6 @@ namespace Training\Attribute\Model;
 
 
 use Training\Attribute\Model\ResourceModel\CategoryCountries as Resource;
-use Training\Attribute\Model\ResourceModel\CategoryCountries\Collection;
 use Training\Attribute\Api\Data\CategoryCountriesRepositoryInterface;
 use Magento\Framework\DB\QueryBuilderFactory;
 
@@ -28,7 +27,7 @@ class CategoryCountriesRepository implements CategoryCountriesRepositoryInterfac
     public function __construct(
         Resource $resource,
         CategoryCountriesFactory $categoryCountriesFactory,
-        CollectionFactory $collectionFactory,
+        \Training\Attribute\Model\ResourceModel\CategoryCountries\Collection $collectionFactory,
         QueryBuilderFactory $queryBuilderFactory
     ) {
         $this->resource = $resource;
