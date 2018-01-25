@@ -4,7 +4,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Training\Attribute\Model\Plugin;
+namespace Training\Attribute\Plugin;
 
 use Magento\Catalog\Api\Data\CategoryExtensionFactory;
 use Magento\Catalog\Api\Data\CategoryExtensionInterface;
@@ -34,10 +34,7 @@ class AfterCategoryLoadAddExtAttr
         return $category;
     }
 
-    public function afterGetExtensionAttributes(
-        \Magento\Catalog\Model\Category $category,
-        CategoryExtensionInterface $extension = null
-    ) {
+    public function afterGetExtensionAttributes(\Magento\Catalog\Model\Category $category, CategoryExtensionInterface $extension = null){
         if ($extension === null) {
             $extension = $this->extensionFactory->create();
         }

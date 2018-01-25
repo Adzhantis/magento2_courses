@@ -6,6 +6,7 @@ namespace Training\Attribute\Model;
 use Training\Attribute\Model\ResourceModel\CategoryCountries as Resource;
 use Training\Attribute\Api\Data\CategoryCountriesRepositoryInterface;
 use Magento\Framework\DB\QueryBuilderFactory;
+use Magento\Framework\Api\SearchResultsInterfaceFactory;
 
 /**
  * Class StockRepository
@@ -17,32 +18,44 @@ class CategoryCountriesRepository implements CategoryCountriesRepositoryInterfac
     protected $categoryCountriesFactory;
     protected $queryBuilderFactory;
     protected $collectionFactory;
+    protected $collectionProcessor;
+    protected $searchResultsInterfaceFactory;
 
     /**
+     * CategoryCountriesRepository constructor.
      * @param Resource $resource
-     * @param CategoryCountriesFactory $categoryCountriesFactory
-     * @param CollectionFactory $collectionFactory
-     * @param QueryBuilderFactory $queryBuilderFactory
+     * @param Resource\CollectionFactory $collectionFactory
+     * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
+     * @param SearchResultsInterfaceFactory $searchResultsInterfaceFactory
      */
     public function __construct(
         Resource $resource,
-        CategoryCountriesFactory $categoryCountriesFactory,
-        \Training\Attribute\Model\ResourceModel\CategoryCountries\Collection $collectionFactory,
-        QueryBuilderFactory $queryBuilderFactory
+        \Training\Attribute\Model\ResourceModel\CategoryCountries\CollectionFactory $collectionFactory,
+        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor,
+        SearchResultsInterfaceFactory $searchResultsInterfaceFactory
     ) {
         $this->resource = $resource;
-        $this->categoryCountriesFactory = $categoryCountriesFactory;
+        $this->searchResultsInterfaceFactory = $searchResultsInterfaceFactory;
+        $this->collectionProcessor = $collectionProcessor;
         $this->collectionFactory = $collectionFactory;
-        $this->queryBuilderFactory = $queryBuilderFactory;
     }
 
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria)
     {
-        $queryBuilder = $this->queryBuilderFactory->create();
-        $queryBuilder->setCriteria($criteria);
-        $queryBuilder->setResource($this->resource);
-        $query = $queryBuilder->create();
-        $collection = $this->collectionFactory->create(['query' => $query]);
-        return $collection;
+        /** @var \Magento\Cms\Model\ResourceModel\Page\Collection $collection */
+        $collection = $this->collectionFactory->create();
+
+        $this->collectionProcessor->process($criteria, $collection);
+
+       /*
+
+        $searchResults = $this->searchResultsInterfaceFactory->create();
+        $searchResults->setSearchCriteria($criteria);
+        $searchResults->setItems($collection->getItems());
+        $searchResults->setTotalCount($collection->getSize());
+
+       */
+
+        return $collection->getItems();
     }
 }

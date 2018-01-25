@@ -2,8 +2,10 @@
 
 namespace Training\Attribute\Model;
 
+use Magento\Catalog\Api\Data\CategoryInterface;
 use \Magento\Catalog\Model\Category\Interceptor;
 use Magento\Framework\App\ResourceConnection;
+use Magento\Framework\Api\SearchResultsInterface;
 
 class CategoryCountries extends \Magento\Framework\Model\AbstractModel
 {
@@ -13,6 +15,7 @@ class CategoryCountries extends \Magento\Framework\Model\AbstractModel
     protected $filter;
     protected $filterGroup;
     protected $categoryCountriesRepository;
+    protected $searchResultsInterface;
 
     /**
      * CategoryCountries constructor.
@@ -52,33 +55,37 @@ class CategoryCountries extends \Magento\Framework\Model\AbstractModel
         $this->_init(ResourceModel\CategoryCountries::class);
     }
 
-   /* public function getCategoryCountries($categoryId)
+    /**
+     * @param CategoryInterface $category
+     * @return CategoryCountries[]
+     */
+    public function getCategoryCountries(CategoryInterface $category)
     {
         if (null === $this->countries) {
-            $criteria = $this->searchCriteria->create();
 
             $filterProduct = $this->filter
-                ->setField("categoryId")
-                ->setValue($categoryId)
+                ->setField("category_id")
+                ->setValue((int)$category->getId())
                 ->setConditionType("eq");
 
             $this->filterGroup->setFilters([$filterProduct]);
             $this->searchCriteria->setFilterGroups([$this->filterGroup]);
-            $this->countries = $this->categoryCountriesRepository->getList($criteria);
+            $this->countries = $this->categoryCountriesRepository->getList($this->searchCriteria);
         }
-        return $stockItem;
-    }*/
 
-    public function getCategoryCountries(Interceptor $category)
-   {
-       $connection = $this->resourceConnection->getConnection();
+        return $this->countries;
+    }
 
-       $select = $connection->select();
-       $select->from('category_countries', ['country_id']);
-       $select->where('category_id = ?', (int)$category->getId());
-
-       $result = $connection->fetchAll($select);
-
-       return $result;
-   }
+//    public function getCategoryCountries(Interceptor $category)
+//   {
+//       $connection = $this->resourceConnection->getConnection();
+//
+//       $select = $connection->select();
+//       $select->from('category_countries', ['country_id']);
+//       $select->where('category_id = ?', (int)$category->getId());
+//
+//       $result = $connection->fetchAll($select);
+//
+//       return $result;
+//   }
 }
