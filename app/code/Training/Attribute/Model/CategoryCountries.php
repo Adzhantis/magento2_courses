@@ -4,7 +4,7 @@ namespace Training\Attribute\Model;
 
 use Magento\Catalog\Api\Data\CategoryInterface;
 use \Magento\Catalog\Model\Category\Interceptor;
-use Magento\Framework\App\ResourceConnection;
+use \Training\Attribute\Model\ResourceModel\CategoryCountries\CollectionFactory;
 use Magento\Framework\Api\SearchResultsInterface;
 
 class CategoryCountries extends \Magento\Framework\Model\AbstractModel
@@ -16,6 +16,7 @@ class CategoryCountries extends \Magento\Framework\Model\AbstractModel
     protected $filterGroup;
     protected $categoryCountriesRepository;
     protected $searchResultsInterface;
+    protected $collectionFactory;
 
     /**
      * CategoryCountries constructor.
@@ -30,23 +31,17 @@ class CategoryCountries extends \Magento\Framework\Model\AbstractModel
      * @param array $data
      */
     public function __construct(
+        CollectionFactory $collectionFactory,
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria,
         \Magento\Framework\Registry $registry,
         ResourceModel\CategoryCountries $resource,
         ResourceModel\CategoryCountries\Collection $resourceCollection,
-        CategoryCountriesRepository $categoryCountriesRepository,
-        \Magento\Framework\Api\Filter $filter,
-        \Magento\Framework\Api\Search\FilterGroup $filterGroup,
-        ResourceConnection $resourceConnection,
         array $data = []
     )
     {
-        $this->resourceConnection = $resourceConnection;
-        $this->filter = $filter;
+        $this->collectionFactory = $collectionFactory;
         $this->searchCriteria = $searchCriteria;
-        $this->filterGroup = $filterGroup;
-        $this->categoryCountriesRepository = $categoryCountriesRepository;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
@@ -62,15 +57,9 @@ class CategoryCountries extends \Magento\Framework\Model\AbstractModel
     public function getCategoryCountries(CategoryInterface $category)
     {
         if (null === $this->countries) {
-
-            $filterProduct = $this->filter
-                ->setField("category_id")
-                ->setValue((int)$category->getId())
-                ->setConditionType("eq");
-
-            $this->filterGroup->setFilters([$filterProduct]);
-            $this->searchCriteria->setFilterGroups([$this->filterGroup]);
-            $this->countries = $this->categoryCountriesRepository->getList($this->searchCriteria);
+            $col = $this->collectionFactory->create();
+            $col->addCategoryIdFilter((int)$category->getId());
+            $this->countries = $col->getItems();
         }
 
         return $this->countries;

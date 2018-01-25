@@ -11,4 +11,15 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         $this->_init(Model::class, ResourceModel::class);
     }
+
+    /**
+     * Add store id(s) filter to collection
+     *
+     * @param int|array $category_id
+     * @return $this
+     */
+    public function addCategoryIdFilter($category_id)
+    {
+        return $this->addFieldToFilter('main_table.category_id', ['in' => $category_id]);
+    }
 }
