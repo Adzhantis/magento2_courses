@@ -77,4 +77,14 @@ class CategoryCountries extends \Magento\Framework\Model\AbstractModel
 //
 //       return $result;
 //   }
+
+    public function getCountriesForForm($empty = false, $all = false)
+    {
+        $options = [];
+        //if ($empty) {
+            $options[] = ['label' => __('-- Please Select --'), 'value' => ''];
+       // }
+
+        return $options;
+    }
 }
