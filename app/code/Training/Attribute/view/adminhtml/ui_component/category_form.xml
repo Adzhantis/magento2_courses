@@ -13,10 +13,10 @@
             <collapsible>false</collapsible>
             <label/>
         </settings>
-        <field name="website_ids" formElement="multiselect">
+        <field name="category_countries" formElement="multiselect">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">category_countries</item>
+                    <item name="source" xsi:type="string">category</item>
                 </item>
             </argument>
             <settings>
@@ -27,7 +27,7 @@
             <formElements>
                 <multiselect>
                     <settings>
-                        <options class="Magento\CatalogRule\Model\Rule\WebsitesOptionsProvider"/>
+                        <options class="Magento\Directory\Model\Config\Source\Country"/>
                     </settings>
                 </multiselect>
             </formElements>

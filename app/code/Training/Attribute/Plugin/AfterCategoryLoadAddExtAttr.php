@@ -29,8 +29,14 @@ class AfterCategoryLoadAddExtAttr
 
     public function afterLoad(\Magento\Catalog\Model\Category $category) {
         $categoryExtension = $category->getExtensionAttributes();
-        $categoryExtension->setCategoryCountries($this->categoryCountriesModel->getCategoryCountries($category));
+        $categoryExtension->setCategoryCountries($this->categoryCountriesModel->getByCategory($category));
         $category->setExtensionAttributes($categoryExtension);
+
+        //for admin page
+        $category->setData('category_countries',
+            explode(',', $this->categoryCountriesModel->getCategoryCountriesForForm($category)));
+
+        //var_dump($category->getExtensionAttributes()->getCategoryCountries()[1]->getData());die;
         return $category;
     }
 

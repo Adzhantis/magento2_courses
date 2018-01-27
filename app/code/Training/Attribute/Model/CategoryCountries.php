@@ -17,6 +17,7 @@ class CategoryCountries extends \Magento\Framework\Model\AbstractModel
     protected $categoryCountriesRepository;
     protected $searchResultsInterface;
     protected $collectionFactory;
+    protected $countryModel;
 
     /**
      * CategoryCountries constructor.
@@ -37,11 +38,13 @@ class CategoryCountries extends \Magento\Framework\Model\AbstractModel
         \Magento\Framework\Registry $registry,
         ResourceModel\CategoryCountries $resource,
         ResourceModel\CategoryCountries\Collection $resourceCollection,
+        \Magento\Directory\Model\Country $countryModel,
         array $data = []
     )
     {
         $this->collectionFactory = $collectionFactory;
         $this->searchCriteria = $searchCriteria;
+        $this->countryModel = $countryModel;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
@@ -54,7 +57,7 @@ class CategoryCountries extends \Magento\Framework\Model\AbstractModel
      * @param CategoryInterface $category
      * @return CategoryCountries[]
      */
-    public function getCategoryCountries(CategoryInterface $category)
+    public function getByCategory(CategoryInterface $category)
     {
         if (null === $this->countries) {
             $col = $this->collectionFactory->create();
@@ -65,26 +68,20 @@ class CategoryCountries extends \Magento\Framework\Model\AbstractModel
         return $this->countries;
     }
 
-//    public function getCategoryCountries(Interceptor $category)
-//   {
-//       $connection = $this->resourceConnection->getConnection();
-//
-//       $select = $connection->select();
-//       $select->from('category_countries', ['country_id']);
-//       $select->where('category_id = ?', (int)$category->getId());
-//
-//       $result = $connection->fetchAll($select);
-//
-//       return $result;
-//   }
-
-    public function getCountriesForForm($empty = false, $all = false)
+    public function getCategoryCountriesForForm(CategoryInterface $category)
     {
-        $options = [];
-        //if ($empty) {
-            $options[] = ['label' => __('-- Please Select --'), 'value' => ''];
-       // }
+        $this->getCategoryCountries($category);
 
-        return $options;
+        $resultString = '';
+
+        foreach ($this->countries as $country){
+            $resultString .= $country->getData('country_id') .',';
+        }
+
+        $resultString = rtrim($resultString,",");
+
+        //var_dump($resultString);die;
+
+        return $resultString;
     }
 }

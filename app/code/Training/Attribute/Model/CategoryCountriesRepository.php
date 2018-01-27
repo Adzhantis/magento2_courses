@@ -58,4 +58,25 @@ class CategoryCountriesRepository implements CategoryCountriesRepositoryInterfac
 
         return $collection->getItems();
     }
+
+    public function save(\Training\Attribute\Model\CategoryCountries $categoryCountries)
+    {
+
+        try {
+            $this->resource->save($categoryCountries);
+        } catch (\Exception $exception) {
+            throw new CouldNotSaveException(__($exception->getMessage()));
+        }
+        return $categoryCountries;
+    }
+
+    public function delete(\Training\Attribute\Model\CategoryCountries $categoryCountries)
+    {
+        try {
+            $this->resource->delete($categoryCountries);
+        } catch (\Exception $exception) {
+            throw new CouldNotDeleteException(__($exception->getMessage()));
+        }
+        return true;
+    }
 }

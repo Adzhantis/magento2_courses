@@ -32,7 +32,7 @@ class UpgradeData implements UpgradeDataInterface
     public function __construct(
         CategoryCountriesFactory $categoryCountriesFactory,
         Collection $categoryCollection,
-        Country $country
+        \Magento\Directory\Model\Config\Source\Country $country
     ){
         $this->categoryCountriesFactory = $categoryCountriesFactory;
         $this->categoryCollection = $categoryCollection;
@@ -43,15 +43,15 @@ class UpgradeData implements UpgradeDataInterface
     {
         if (version_compare($context->getVersion(), '2.0.1', '<')) {
 
-            $countries = $this->getAllCountries($setup);
-            $categories = $this->categoryCollection->getItems();
+            $countries       = $this->country->toOptionArray();
+            $categories      = $this->categoryCollection->getItems();
             $categoriesCount = count($this->categoryCollection->getItems());
 
             for ($a = 0; $a < 50; $a++) {
 
                 $this->categoryCountriesFactory->create()->setData(
                     [
-                        'country_id' => $countries[rand(0, 244)]['country_id'],
+                        'country_id' => $countries[rand(1, 245)]['value'],
                         'category_id' => $categories[rand(1, $categoriesCount)]->getId(),
                     ]
                 )->save();
@@ -60,18 +60,4 @@ class UpgradeData implements UpgradeDataInterface
         }
     }
 
-    /**
-     * @param $setup
-     * @return mixed
-     */
-    private function getAllCountries($setup):array {
-
-        $connection = $setup->getConnection();
-
-        $select = $connection->select();
-
-        $select->from('directory_country', 'country_id');
-
-        return $connection->fetchAll($select);
-    }
 }

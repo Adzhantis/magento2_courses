@@ -4,6 +4,8 @@
     <type name="Magento\Catalog\Model\Category">
         <plugin name="AfterCategoryLoadAddExtAttr"
                 type="Training\Attribute\Plugin\AfterCategoryLoadAddExtAttr"/>
+        <plugin name="AfterCategorySaveExtAttr"
+                type="Training\Attribute\Plugin\AfterCategorySaveExtAttr"/>
     </type>
 
 </config>
