@@ -119,5 +119,6 @@ return array (
     'Unit1_FirstModule' => 1,
     'Unit1_SecondModule' => 1,
     'Unit4_Database' => 1,
+    'Unit6_Grid' => 1,
   ),
 );
