@@ -1,0 +1,19 @@
+<div id="freeshipping-banner" data-bind="scope: 'freeshipping'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+{
+    "#freeshipping-banner": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "freeshipping": {
+                    "component": "Training_FreeShipping/js/freeshipping",
+                    "config": {
+                        "template": "Training_FreeShipping/freeshipping_test"
+                    }
+                }
+            }
+        }
+    }
+}
+</script>

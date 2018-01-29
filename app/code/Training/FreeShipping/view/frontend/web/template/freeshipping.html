@@ -1,0 +1,11 @@
+<div>
+    <!-- ko if: freeshippingData().is_freeshipping  -->
+    <span data-bind="i18n: 'Free Shipping Available'"></span>
+    <!-- /ko -->
+    <!-- ko ifnot: freeshippingData().is_freeshipping  -->
+    <span data-bind="html: freeshippingData().amount_left"></span>
+    <span data-bind="i18n: 'Left for Free Shipping'"></span>
+    <!-- /ko -->
+    <div visible="log()"></div>
+</div>
+
