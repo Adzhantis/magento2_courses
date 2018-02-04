@@ -1,4 +1,25 @@
 <div>
-    <div visible="logMinicart()"></div>
+    <!-- ko if: productShowData().is_full  -->
+    <span data-bind="i18n: 'is full'"></span>
+    <!-- /ko -->
+    <!-- ko ifnot: productShowData().is_full  -->
+    <span data-bind="i18n: 'is not full'"></span>
+    <!-- /ko -->
+
+    <!-- ko if: productShowData().has_minicart_items  -->
+    <span data-bind="i18n:' amount_left= '"></span>
+    <span data-bind="text: productShowData().amount_left"></span>
+    <span data-bind="i18n:' max_products_minicart_show = '"></span>
+    <span data-bind="text: productShowData().max_products_minicart_show"></span>
+    <span data-bind="i18n: 'items count = '"></span>
+    <span data-bind="text: productShowData().items_count"></span>
+    <!-- /ko -->
+
+    <!-- ko if: productShowData().minicart_already_show_max  -->
+    <span data-bind="i18n: 'minicart already show max'"></span>
+    <!-- /ko -->
+
+    </div>
+
 </div>
 
