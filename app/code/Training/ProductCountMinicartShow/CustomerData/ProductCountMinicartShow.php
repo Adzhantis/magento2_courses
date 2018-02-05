@@ -60,6 +60,8 @@ class ProductCountMinicartShow implements SectionSourceInterface
             'is_full' => $isFull,
             'minicart_already_show_max' => $minicartAlreadyShowMax,
             'amount_left' => $maxProductsMinicartShow - $itemsCount,
+            'items_count' => $itemsCount,
+            'max_products_minicart_show' => $maxProductsMinicartShow,
         ];
     }
 }

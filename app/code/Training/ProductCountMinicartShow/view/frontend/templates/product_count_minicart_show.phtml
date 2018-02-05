@@ -1,19 +1,20 @@
 <div id="product_count_minicart" data-bind="scope: 'product_count_minicart_show'">
-    <h2>
-        Count products show in minicart
-    </h2>
+    <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
 
 <script type="text/x-magento-init">
     {
-         "*": {
-                "Magento_Ui/js/core/app": {
-                    "components": {
-                        "product_count_minicart_show": {
-                            "component": "Training_ProductCountMinicartShow/js/product_count_minicart_show"
+     "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "product_count_minicart_show": {
+                        "component": "Training_ProductCountMinicartShow/js/product_count_minicart_show",
+                        "config": {
+                            "template": "Training_ProductCountMinicartShow/product_count_minicart_show"
                         }
                     }
                 }
             }
+        }
     }
 </script>

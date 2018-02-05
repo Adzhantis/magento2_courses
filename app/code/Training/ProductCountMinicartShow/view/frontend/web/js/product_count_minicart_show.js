@@ -1,8 +1,3 @@
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
 define([
     'uiComponent',
     'Magento_Customer/js/customer-data',
@@ -14,8 +9,6 @@ define([
         defaults: {
             template: 'Training_ProductCountMinicartShow/product_count_minicart_show'
         },
-        logMinicart: function() {
-            console.log(customerData.get('productcountminicartshow'));
-        }
+        productShowData: customerData.get('product_count_minicart_show')
     });
 });
